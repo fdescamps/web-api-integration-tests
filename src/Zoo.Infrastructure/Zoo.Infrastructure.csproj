@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Collection.EntityFrameworkCore" Version="1.0.1" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Specification\Core.Specification.csproj" />
+      <ProjectReference Include="..\Zoo.Administration\Zoo.Administration.csproj" />
+      <ProjectReference Include="..\Zoo.Park\Zoo.Park.csproj" />
+    </ItemGroup>
+    
+</Project>

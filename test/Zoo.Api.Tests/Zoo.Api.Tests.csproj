@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <IsPackable>false</IsPackable>
+        <GenerateSpecFlowAssemblyHooksFile>true</GenerateSpecFlowAssemblyHooksFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="5.10.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
+        <PackageReference Include="NBuilder" Version="6.1.0" />
+        <PackageReference Include="nunit" Version="3.12.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+        <PackageReference Include="SpecFlow.NUnit" Version="3.4.31" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Compile Include="**\*.feature.cs" Exclude="@(Compile)">
+            <DependentUpon>**\*.feature</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Zoo.Api\Zoo.Api.csproj" />
+    </ItemGroup>
+    
+</Project>
