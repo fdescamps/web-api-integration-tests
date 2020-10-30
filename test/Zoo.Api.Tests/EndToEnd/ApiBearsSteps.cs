@@ -14,6 +14,10 @@
     using FluentAssertions;
 
     using Infrastructure.Entities;
+    using Infrastructure.Store;
+
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -130,6 +134,21 @@
             var locationValue = response.Headers.Location;
             successValue.Should().BeEquivalentTo(expectedSuccessValue);
             locationValue.Should().Be(expectedLocation);
+            
+            this.scenarioContext.AddAssertion(
+                provider =>
+                    {
+                        var dbContext = provider.GetRequiredService<IDbContext>();
+                        var animal = dbContext.Set<Animal>()
+                                              .Include(a => a.Family)
+                                              .Include(a => a.AnimalEats)
+                                              .ThenInclude(a => a.Food)
+                                              .Single(a => a.Id == successValue.Id);
+                        animal.Family.Name.Should().Be(successValue.Family);
+                        animal.Name.Should().Be(successValue.Name);
+                        animal.Legs.Should().Be(successValue.Legs);
+                        animal.AnimalEats.Select(ae => ae.Food.Name).Should().BeEquivalentTo(successValue.Foods);
+                    });
         }
     }
 }

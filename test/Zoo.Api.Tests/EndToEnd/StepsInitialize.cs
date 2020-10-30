@@ -26,6 +26,7 @@
         public void AfterScenario()
         {
             var webFactory = this.scenarioContext.Get<WebFactory<Startup, EndToEndDbContext>>();
+            this.scenarioContext.Get<Assertion>()(webFactory.Server.Services);
             webFactory.Dispose();
         }
 
